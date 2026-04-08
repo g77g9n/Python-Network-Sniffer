@@ -1,26 +1,25 @@
-from scapy.all import sniff, IP, TCP, UDP
+# Advanced Python Network Sniffer 🛰️
 
-print("-" * 50)
-print("Starting Advanced Network Sniffer...")
-print("Listening for 10 packets (Open Firefox to trigger)")
-print("-" * 50)
+## Overview
+A lightweight, high-performance network analysis tool engineered in Python using the **Scapy** library. This tool intercepts live network packets traversing the local interface, providing real-time visibility into source/destination communication and transport layer protocols.
 
-def process_packet(packet):
-    if packet.haslayer(IP):
-        src = packet[IP].src
-        dst = packet[IP].dst
-        
-        # Identify the protocol
-        proto = "OTHER"
-        if packet.haslayer(TCP):
-            proto = "TCP (Web/Secure)"
-        elif packet.haslayer(UDP):
-            proto = "UDP (DNS/Streaming)"
-            
-        print(f"[+] {proto:18} | {src} -> {dst}")
+## Key Features
+- **Live Packet Interception:** Captures raw IPv4 traffic directly from the network interface.
+- **Protocol Identification:** Automatically categorizes traffic into TCP, UDP, or other protocol types.
+- **Real-time Parsing:** Extracts and displays source and destination IP addresses for every packet.
+- **Security Analysis:** Useful for identifying unauthorized network connections or analyzing DNS/Web traffic patterns.
 
-# Capture 10 packets
-sniff(prn=process_packet, count=10)
+## Skills Demonstrated
+- **Socket Programming:** Understanding how data travels across the OSI model (Layer 3 & 4).
+- **Traffic Analysis:** Hands-on experience with packet structure and protocol handshakes.
+- **Linux Security:** Managing elevated permissions (sudo/root) to access raw network sockets in Kali Linux.
 
-print("-" * 50)
-print("Analysis Complete!")
+## Tools & Environment
+- **Language:** Python 3
+- **Library:** Scapy
+- **Platform:** Kali Linux (VirtualBox)
+
+## How to Run
+1. Ensure Scapy is installed: `sudo apt install python3-scapy`
+2. Run the script with root privileges: `sudo python3 my_sniffer.py`
+3. Generate traffic by opening a web browser and observe the live capture in the terminal.
